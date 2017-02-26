@@ -1,0 +1,22 @@
+{
+  "name": "code",
+  "version": "1.0.0",
+  "description": "使用vue node mongodb重构",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HiLanner/rebuild-my-travel-website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HiLanner/rebuild-my-travel-website/issues"
+  },
+  "homepage": "https://github.com/HiLanner/rebuild-my-travel-website#readme",
+  "devDependencies": {
+    "webpack": "^2.2.1"
+  }
+}
