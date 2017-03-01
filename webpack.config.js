@@ -18,45 +18,38 @@ var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var config = {
     entry: require('./server.config').entries,
     output: {
-        path: path.resolve(__dirname,'public'),
+        path: path.resolve(__dirname,'assets'),
         publicPath: '/static/',
         filename: 'scripts/[name].js'
     },
     module: {
-        rules:[
+        loaders:[
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                use: "babel-loader"
+                loader: "babel"
             },
             {
                 test: /\.css$/,
-                use: 'style-loader!css-loader?importLoaders=1!postcss-loader'
+                loader: 'style-loader!css-loader?importLoaders=1!postcss-loader'
             },
             {
                 test: /\.styl$/,
-                use: [
-                    {
-                        loader: 'style-loader!css-loader!postcss-loader!stylus-loader',
-                        options: {
-                            plugins: function () {
-                                return [
-                                    require('precss'),
-                                    require('autoprefixer')
-                                ];
-                            }
-                        }
-                    }
-                ]
+                loader: 'style-loader!css-loader!postcss-loader!stylus-loader'
             },
             {
                 test: /\.(gif|jpg|jpeg|png|bmp|svg|woff|woff2|eot|ttf|ico)$/i,
-                use: 'url',
+                loader: 'url-loader',
                 query: {
                     limit: 1,
                     name: '[name]-[hash:5].[ext]'
                 }
             }
+        ]
+    },
+    postcss: function () {
+        return [
+            autoprefixer({browsers: '> 1%'})
         ]
     }
 }
