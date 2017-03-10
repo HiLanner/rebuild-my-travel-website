@@ -1,0 +1,3 @@
+function wrong(){
+    alert('aaa')
+}

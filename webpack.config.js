@@ -20,7 +20,7 @@ var config = {
     output: {
         path: path.resolve(__dirname,'assets'),
         publicPath: '/static/',
-        filename: 'scripts/[name].js'
+        filename: '[name].js'
     },
     module: {
         loaders:[
@@ -47,6 +47,9 @@ var config = {
             }
         ]
     },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin()
+    ],
     postcss: function () {
         return [
             autoprefixer({browsers: '> 1%'})
