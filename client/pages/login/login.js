@@ -1,3 +1,0 @@
-function wrong(){
-    alert('aaa')
-}

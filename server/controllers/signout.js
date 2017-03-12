@@ -1,15 +1,15 @@
 var express = require('express');
 var router = express.Router();
 
-var checkNotLogin = require('../middlewares/check').checkNotLogin;
+var checkLogin = require('../middlewares/check').checkLogin;
 
 // 获取登陆页
-router.get('/',checkNotLogin,function (req,res,next) {
+router.get('/',checkLogin,function (req,res,next) {
     res.send(req.flash());
 })
 
 // 用户登录
-router.post('/',checkNotLogin,function (req,res,next) {
+router.post('/',checkLogin,function (req,res,next) {
     res.send(req.flash());
 })
 

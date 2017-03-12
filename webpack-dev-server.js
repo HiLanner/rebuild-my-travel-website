@@ -8,7 +8,7 @@ for (var i in config.entry) {
 }
 var compiler = webpack(config);
 var server = new WebpackDevServer(compiler,{
-    contentBase: "http://localhost:8080/assets/",
+    contentBase: "http://localhost:8080/build/",
     hot: true
 });
 server.listen(devPort)
