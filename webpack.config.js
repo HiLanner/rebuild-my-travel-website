@@ -2,8 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var serverConfig = require('./server.config');
 var autoprefixer = require('autoprefixer');
-
-//var glob = require('glob');//利用glob模块可以很方便的获取src/scripts/page路径下的所有js入口文件。同理，可以实现自动的进行与入口文件相对应的模板配置
+var chunks = Object.keys(serverConfig.entries);
 /*
  html-webpack-plugin插件，重中之重，webpack中生成HTML的插件，
  具体可以去这里查看https://www.npmjs.com/package/html-webpack-plugin
@@ -22,7 +21,7 @@ var config = {
     output: {
         path: path.resolve(__dirname,'build'),
         publicPath: '/static/',
-        filename: '[name]/[name]-[hash:5].js'
+        filename: '[name]-[hash:5].js'
     },
     module: {
         loaders:[
@@ -41,6 +40,10 @@ var config = {
                 // loader: 'style-loader!css-loader!postcss-loader!stylus-loader'
                 loader: ExtractTextPlugin.extract('style', 'css!stylus')
             },
+             {
+                test: /\.html$/,
+                loader: "raw-loader" // loaders: ['raw-loader'] is also perfectly acceptable.
+            },
             {
                 test: /\.(gif|jpg|jpeg|png|bmp|svg|woff|woff2|eot|ttf|ico)$/i,
                 loader: 'url-loader',
@@ -53,6 +56,11 @@ var config = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+        // new CommonsChunkPlugin({
+        //     name: 'vendors', // 将公共模块提取，生成名为`vendors`的chunk
+        //     chunks: chunks,
+        //     minChunks: chunks.length // 提取所有entry共同依赖的模块
+        // }),
         new ExtractTextPlugin('[name]/[name].[hash:5].css'),//单独使用link标签加载css并设置路径，相对于output配置中的publickPath
     ],
     postcss: function () {
@@ -62,8 +70,8 @@ var config = {
     }
 }
 
-// var pages = Object.keys(serverConfig.entries);
-// pages.forEach(function (pathname) {
+// var assets = Object.keys(serverConfig.entries);
+// assets.forEach(function (pathname) {
 //     var conf = {
 //         filename: './views/' + pathname +'.html',
 //         template: 'client/views/' + pathname + '.html',
@@ -82,7 +90,6 @@ var config = {
 // })
 
 var pages = Object.keys(serverConfig.entries);
-// pages.forEach(function (pathname) {
 pages.forEach(function(pathname) {
     // 每个页面生成一个entry，如果需要HotUpdate，在这里修改entry
     // webpackConfig.entry[name] = entries[name];
