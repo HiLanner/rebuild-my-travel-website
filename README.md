@@ -1,5 +1,15 @@
 # rebuild-my-travel-website
 使用node+vue+mongodb重构旅游网站
+
+### 1. 环境说明
+     需系统安装mongoDB环境 本项目实用的数据库是Robomongo
+     node版本 8.10.0
+     npm 5.6.0
+
+### 2. 启动命令
+     npm run start
+
+
 - website
 
     - bin                    #express项目启动文件
@@ -105,3 +115,5 @@
             1. 发表评论: POST/question/:questionID/answer/:answerID/comment
         + 删除评论
             1. 删除评论: GET/question/:questionID/answer/:answerID/comment/remove
+
+
