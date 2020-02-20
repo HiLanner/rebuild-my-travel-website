@@ -7,6 +7,7 @@
      npm 5.6.0
 
 ### 2. 启动命令
+     npm install
      npm run start
 
 
