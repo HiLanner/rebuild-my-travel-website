@@ -1,0 +1,8 @@
+html {
+  height: 657px;
+  width: 100%;
+  color: #f00;
+}
+html body {
+  background: url(/static/a-32bed.jpeg) no-repeat;
+}

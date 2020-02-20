@@ -21,7 +21,8 @@ var config = {
     output: {
         path: path.resolve(__dirname,'build'),
         publicPath: '/static/',
-        filename: '[name]-[hash:5].js'
+        filename: '[name]-[hash:5].js',
+        chunkFilename: '[id].chunk.js?[chunkhash]'
     },
     module: {
         loaders:[
@@ -56,11 +57,11 @@ var config = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        // new CommonsChunkPlugin({
-        //     name: 'vendors', // 将公共模块提取，生成名为`vendors`的chunk
-        //     chunks: chunks,
-        //     minChunks: chunks.length // 提取所有entry共同依赖的模块
-        // }),
+        new CommonsChunkPlugin({
+            name: 'vendors', // 将公共模块提取，生成名为`vendors`的chunk
+            chunks: chunks,
+            minChunks: chunks.length // 提取所有entry共同依赖的模块
+        }),
         new ExtractTextPlugin('[name]/[name].[hash:5].css'),//单独使用link标签加载css并设置路径，相对于output配置中的publickPath
     ],
     postcss: function () {
@@ -100,7 +101,7 @@ pages.forEach(function(pathname) {
         filename: './views/' + pathname +'.html',
         // 每个html的模版，这里多个页面使用同一个模版
         template: 'client/views/' + pathname + '.html',
-        // 自动将引用插入html
+        // 自动将引用插入html ejs!app/assets/index.ejs
         inject: true,
         // 每个html引用的js模块，也可以在这里加上vendor等公用模块
         chunks: [pathname]
