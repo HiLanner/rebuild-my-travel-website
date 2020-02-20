@@ -38,7 +38,7 @@
     "stylus-loader": "^2.5.0",
     "url-loader": "^0.5.8",
     "webpack": "^1.13.0",
-    "webpack-dev-server": "^1.14.1"
+    "webpack-dev-server": "^3.1.11"
   },
   "dependencies": {
     "config": "^2.0.2",
